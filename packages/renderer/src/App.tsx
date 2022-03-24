@@ -17,55 +17,55 @@ const App = () => {
   const [accounts, setAccounts] = useState<string[]>([])
 
   const connectWallet = () => {
-    // Create a connector
-    const connector = new WalletConnect({
-      bridge: "https://bridge.walletconnect.org", // Required
-      qrcodeModal: QRCodeModal,
-    });
+    // // Create a connector
+    // const connector = new WalletConnect({
+    //   bridge: "https://bridge.walletconnect.org", // Required
+    //   qrcodeModal: QRCodeModal,
+    // });
 
-    // Check if connection is already established
-    if (!connector.connected) {
-      // create new session
-      console.log('create session')
-      connector.createSession().then(() => {
-        QRCode.toDataURL(connector.uri).then((value) => {
-          console.log(value)
-          setQRImage(value)
-        })
-      }).catch(error => {
+    // // Check if connection is already established
+    // if (!connector.connected) {
+    //   // create new session
+    //   console.log('create session')
+    //   connector.createSession().then(() => {
+    //     QRCode.toDataURL(connector.uri).then((value) => {
+    //       console.log(value)
+    //       setQRImage(value)
+    //     })
+    //   }).catch(error => {
 
-      })
-    }
+    //   })
+    // }
 
-    // Subscribe to connection events
-    connector.on("connect", (error, payload) => {
-      if (error) {
-        throw error;
-      }
-      console.log('connect', payload)
-      // Get provided accounts and chainId
-      const { accounts, chainId } = payload.params[0];
-    });
+    // // Subscribe to connection events
+    // connector.on("connect", (error, payload) => {
+    //   if (error) {
+    //     throw error;
+    //   }
+    //   console.log('connect', payload)
+    //   // Get provided accounts and chainId
+    //   const { accounts, chainId } = payload.params[0];
+    // });
 
-    connector.on("session_update", (error, payload) => {
-      if (error) {
-        throw error;
-      }
-      console.log('session_update', payload)
+    // connector.on("session_update", (error, payload) => {
+    //   if (error) {
+    //     throw error;
+    //   }
+    //   console.log('session_update', payload)
 
-      // Get updated accounts and chainId
-      const { accounts, chainId } = payload.params[0];
-      setConnectInfo(payload.params[0])
-    });
+    //   // Get updated accounts and chainId
+    //   const { accounts, chainId } = payload.params[0];
+    //   setConnectInfo(payload.params[0])
+    // });
 
-    connector.on("disconnect", (error, payload) => {
-      if (error) {
-        throw error;
-      }
-      console.log('disconnect', payload)
+    // connector.on("disconnect", (error, payload) => {
+    //   if (error) {
+    //     throw error;
+    //   }
+    //   console.log('disconnect', payload)
 
-      // Delete connector
-    });
+    //   // Delete connector
+    // });
   }
 
 
